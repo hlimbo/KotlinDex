@@ -9,7 +9,7 @@
             android:layout_width="64dp"
             app:srcCompat="@mipmap/ic_launcher"
             android:id="@+id/pokemonIcon"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             app:layout_constraintTop_toTopOf="@+id/pokemonName"
             app:layout_constraintBottom_toBottomOf="@+id/pokemonName"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"/>
@@ -20,5 +20,6 @@
             android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent" tools:text="Bulbasaur" android:textAlignment="viewStart"
             android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="16dp" app:layout_constraintEnd_toStartOf="@+id/pokemonIcon"/>
+            android:layout_marginEnd="16dp" app:layout_constraintEnd_toStartOf="@+id/pokemonIcon"
+            android:text="Bulbasaur"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
