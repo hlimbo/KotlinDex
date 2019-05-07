@@ -5,6 +5,7 @@ import com.limbo.kotlindex.models.SearchResultsModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.QueryMap
 import retrofit2.http.Url
 
 interface PokeApiHttpService {
@@ -15,5 +16,5 @@ interface PokeApiHttpService {
     fun obtainPokemonSearchResultByUrl(@Url url: String) : Call<PokemonModel>
 
     @GET("pokemon")
-    fun obtainPokemonSearchResults() : Call<SearchResultsModel>
+    fun obtainPokemonSearchResults(@QueryMap options: Map<String, String>) : Call<SearchResultsModel>
 }

@@ -1,0 +1,11 @@
+package com.limbo.kotlindex
+
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+
+class SearchResultViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    var pokemonName = view.findViewById<TextView>(R.id.pokemonName)
+    var pokemonIcon = view.findViewById<ImageView>(R.id.pokemonIcon)
+}

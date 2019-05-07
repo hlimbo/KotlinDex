@@ -10,11 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.limbo.kotlindex.models.PokemonModel
 import com.squareup.picasso.Picasso
 
-class SearchResultViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    var pokemonName = view.findViewById<TextView>(R.id.pokemonName)
-    var pokemonIcon = view.findViewById<ImageView>(R.id.pokemonIcon)
-}
-
 class SearchResultAdapter(private var searchResultsList: MutableList<PokemonModel>): RecyclerView.Adapter<SearchResultViewHolder>() {
     val TAG = "SearchResultAdapt"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {
@@ -28,7 +23,7 @@ class SearchResultAdapter(private var searchResultsList: MutableList<PokemonMode
     }
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
-        Log.d(TAG, ".onBindViewHolder called")
+        Log.d(TAG, ".onBindViewHolder called on position: $position")
         // this method when called binds the view holder to a view that can be reused!
         val searchResult = searchResultsList[position]
 

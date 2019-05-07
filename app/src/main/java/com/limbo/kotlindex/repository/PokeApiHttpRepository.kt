@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.limbo.kotlindex.PokeApiHttpService
+import com.limbo.kotlindex.PokeApiServiceFactory
 import com.limbo.kotlindex.models.PokemonModel
 import com.limbo.kotlindex.models.SearchResultsModel
 import retrofit2.Call
@@ -17,25 +18,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 class PokeApiHttpRepository {
     private val BASE_URL = "https://pokeapi.co/api/v2/"
     private val TAG = "PokeAPIRepo"
-    private val retroFitInstance: Retrofit by lazy {
-        // By Default, Gson omits all fields that are null during serialization ~ source of all bugs if values to be returned in a field are not present....
-        // https://google.github.io/gson/apidocs/com/google/gson/GsonBuilder.html#serializeNulls--
-        val gson: Gson = GsonBuilder().setVersion(1.0).create()
-
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-    }
 
     private val pokeApiService: PokeApiHttpService by lazy {
-        retroFitInstance.create(PokeApiHttpService::class.java)
+        PokeApiServiceFactory.create(BASE_URL)
     }
 
-    fun obtainPokemonSearchResults(): LiveData<SearchResultsModel> {
+    fun obtainPokemonSearchResults(options: Map<String, String>): LiveData<SearchResultsModel> {
         val data: MutableLiveData<SearchResultsModel> = MutableLiveData()
 
-        pokeApiService.obtainPokemonSearchResults().enqueue(object: Callback<SearchResultsModel> {
+        pokeApiService.obtainPokemonSearchResults(options).enqueue(object: Callback<SearchResultsModel> {
             override fun onFailure(call: Call<SearchResultsModel>, t: Throwable) {
                 Log.d(TAG, ".obtainPokemonSearchResults onFailure method invoked")
             }
