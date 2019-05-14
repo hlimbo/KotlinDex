@@ -19,12 +19,12 @@ import java.util.concurrent.Executors
 class PokeApiNetworkPagingRepository {
     private val TAG = "PokeNetworkPageRepo"
     private val BASE_URL = "https://pokeapi.co/api/v2/"
-    private val NETWORK_IO = Executors.newFixedThreadPool(5)
 
     private val api: PokeApiHttpService by lazy {
         PokeApiServiceFactory.create(BASE_URL)
     }
 
+    // old crummy way
     fun getPokemonList(pageSize: Int) : LiveData<PagedList<SearchResultModel>> {
         Log.d(TAG, ".getPokemonList($pageSize) called")
         val pokemonDataSourceFactory = PokemonDataSourceFactory(api)

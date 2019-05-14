@@ -19,4 +19,6 @@ class SearchResultPagingViewModel(private val repository: PokeApiNetworkPagingRe
         Log.d(TAG, ".searchResults() with with value?: ${results.value?.get(0)?.name}")
         return results
     }
+
+    // make another function that combines pokemon names with pokemon image resource paths
 }

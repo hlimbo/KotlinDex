@@ -43,18 +43,18 @@ class PokemonDataSource(private val pokeService: PokeApiHttpService) : Positiona
         val options = HashMap<String, String>()
         options["offset"] = position.toString()
         options["limit"] = loadSize.toString()
-        pokeService.obtainPokemonSearchResults(options).enqueue(object: Callback<SearchResultsModel> {
-            override fun onFailure(call: Call<SearchResultsModel>, t: Throwable) {
-                Log.d(TAG, ".onFailure called because of: ${t.message}")
-            }
-
-            override fun onResponse(call: Call<SearchResultsModel>, response: Response<SearchResultsModel>) {
-                if(response.isSuccessful) {
-                    Log.d(TAG, ".onResponse called with response: ${response.body()!!.results}")
-                    callback.onResult(response.body()!!.results, position, loadSize)
-                }
-            }
-        })
+//        pokeService.obtainPokemonSearchResults(options).enqueue(object: Callback<SearchResultsModel> {
+//            override fun onFailure(call: Call<SearchResultsModel>, t: Throwable) {
+//                Log.d(TAG, ".onFailure called because of: ${t.message}")
+//            }
+//
+//            override fun onResponse(call: Call<SearchResultsModel>, response: Response<SearchResultsModel>) {
+//                if(response.isSuccessful) {
+//                    Log.d(TAG, ".onResponse called with response: ${response.body()!!.results}")
+//                    callback.onResult(response.body()!!.results, position, loadSize)
+//                }
+//            }
+//        })
     }
 
     private fun loadRangeInternal(startPosition: Int, loadCount: Int): List<SearchResultModel> {
@@ -65,20 +65,20 @@ class PokemonDataSource(private val pokeService: PokeApiHttpService) : Positiona
         val options = HashMap<String, String>()
         options["offset"] = startPosition.toString()
         options["limit"] = loadCount.toString()
-        pokeService.obtainPokemonSearchResults(options).enqueue(object: Callback<SearchResultsModel> {
-            override fun onFailure(call: Call<SearchResultsModel>, t: Throwable) {
-                Log.d(TAG, ".onFailure called because of: ${t.message}")
-            }
-
-            override fun onResponse(call: Call<SearchResultsModel>, response: Response<SearchResultsModel>) {
-                if(response.isSuccessful) {
-                    Log.d(TAG, ".onResponse called with response: ${response.body()}")
-
-                    // how to return this async data????????????
-                    resultsList = response.body()!!.results
-                }
-            }
-        })
+//        pokeService.obtainPokemonSearchResults(options).enqueue(object: Callback<SearchResultsModel> {
+//            override fun onFailure(call: Call<SearchResultsModel>, t: Throwable) {
+//                Log.d(TAG, ".onFailure called because of: ${t.message}")
+//            }
+//
+//            override fun onResponse(call: Call<SearchResultsModel>, response: Response<SearchResultsModel>) {
+//                if(response.isSuccessful) {
+//                    Log.d(TAG, ".onResponse called with response: ${response.body()}")
+//
+//                    // how to return this async data????????????
+//                    resultsList = response.body()!!.results
+//                }
+//            }
+//        })
 
         return resultsList
     }

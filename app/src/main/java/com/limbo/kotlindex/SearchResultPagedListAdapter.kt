@@ -22,7 +22,7 @@ class SearchResultPagedListAdapter() : PagedListAdapter<SearchResultModel, Recyc
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         Log.d(TAG, ".onBindViewHolder called on position: $position")
         val searchResultRecord = getItem(position)
-        (holder as SearchResultViewHolder).pokemonName.text = searchResultRecord!!.name
+        (holder as SearchResultViewHolder).pokemonName.text = searchResultRecord?.name
         // no pictures for now
     }
 

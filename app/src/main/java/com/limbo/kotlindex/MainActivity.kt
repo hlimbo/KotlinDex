@@ -17,6 +17,7 @@ import com.limbo.kotlindex.viewmodels.SearchResultViewModel
 import kotlinx.android.synthetic.main.search_results_recycler_view.*
 
 // implement pagination - DONE
+// convert network calls to coroutines ~ DONE
 // TODO: load sprite image of pokemon
 // TODO: save data requested over the network on a local db on phone
 // TODO: save image url paths on a local db
