@@ -11,7 +11,11 @@ import com.limbo.kotlindex.models.SearchResultModel
 import com.squareup.picasso.Picasso
 
 class SearchResultPagedListAdapter() : PagedListAdapter<SearchResultModel, RecyclerView.ViewHolder>(POST_COMPARATOR){
-    val TAG = "SearchResultPLA"
+    private val TAG = "SearchResultPLA"
+
+    private val pokePicUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+    private val PNG = ".png"
+
     // called whenever ui requests a data holder for ui to render (can be cached internally by Android Framework since creating and destroying view objects during runtime is expensive process
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         Log.d(TAG, ".onCreateViewHolder called")
@@ -23,7 +27,21 @@ class SearchResultPagedListAdapter() : PagedListAdapter<SearchResultModel, Recyc
         Log.d(TAG, ".onBindViewHolder called on position: $position")
         val searchResultRecord = getItem(position)
         (holder as SearchResultViewHolder).pokemonName.text = searchResultRecord?.name
-        // no pictures for now
+
+        // e.g. https://pokeapi.co/api/v2/pokemon/7/ (need to cache pokemon number somewhere..
+        var pokemonNumber = if(searchResultRecord != null) {
+            searchResultRecord.url.split("/")[6]
+        } else {
+            "0"
+        }
+        holder.pokemonNumber.text = "#".plus(pokemonNumber)
+
+        Picasso.get().load("$pokePicUrl$pokemonNumber$PNG")
+            .error(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .resize(120, 120)
+            .centerInside()
+            .into(holder.pokemonIcon)
     }
 
     companion object {

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.search_results_recycler_view.*
 
 // implement pagination - DONE
 // convert network calls to coroutines ~ DONE
-// TODO: load sprite image of pokemon
+// load sprite image of pokemon - DONE
 // TODO: save data requested over the network on a local db on phone
 // TODO: save image url paths on a local db
 // TODO: implement search bar (exact bar search)

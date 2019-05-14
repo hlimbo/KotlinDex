@@ -1,6 +1,5 @@
 package com.limbo.kotlindex.models
 
-import androidx.paging.PagedList
 import com.google.gson.annotations.SerializedName
 
 data class SearchResultsModel(val count: Int,

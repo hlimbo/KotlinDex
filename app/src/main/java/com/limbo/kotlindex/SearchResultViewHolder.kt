@@ -8,4 +8,5 @@ import androidx.recyclerview.widget.RecyclerView
 class SearchResultViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     var pokemonName = view.findViewById<TextView>(R.id.pokemonName)
     var pokemonIcon = view.findViewById<ImageView>(R.id.pokemonIcon)
+    var pokemonNumber = view.findViewById<TextView>(R.id.pokemonNumber)
 }
