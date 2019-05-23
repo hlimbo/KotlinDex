@@ -7,6 +7,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,44 +22,26 @@ import kotlinx.android.synthetic.main.search_results_recycler_view.*
 // implement pagination - DONE
 // convert network calls to coroutines ~ DONE
 // load sprite image of pokemon - DONE
+// TODO: implement Pokemon information page
+/*
+    * name
+    * id
+    * abilities
+    * front sprite (I wish I could use a bigger picture... maybe find a different API for this)
+    * types
+ */
 // TODO: save data requested over the network on a local db on phone
 // TODO: save image url paths on a local db
 // TODO: implement search bar (exact bar search)
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
-
     private lateinit var model: SearchResultPagingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.search_results_recycler_view)
+        setContentView(R.layout.activity_main)
 
         Log.d(TAG, ".onCreate called")
-
-        model = getViewModel()
-
-        val adapter = SearchResultPagedListAdapter()
-        search_recycler_view.layoutManager = LinearLayoutManager(this)
-        search_recycler_view.adapter = adapter
-        search_recycler_view.addItemDecoration(DividerItemDecoration(search_recycler_view.context, DividerItemDecoration.VERTICAL))
-
-        model.searchResults().observe(this, Observer<PagedList<SearchResultModel>> {
-            Log.d(TAG, ".onChanged called with it here: $it")
-
-            // update ui with list obtained from this live data
-            adapter.submitList(it)
-        })
-    }
-
-    private fun getViewModel(): SearchResultPagingViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val repo = PokeApiNetworkPagingRepository()
-
-                @Suppress("UNCHECKED_CAST")
-                return SearchResultPagingViewModel(repo) as T
-            }
-        })[SearchResultPagingViewModel::class.java]
     }
 
     // OLD IMPLEMENTATION

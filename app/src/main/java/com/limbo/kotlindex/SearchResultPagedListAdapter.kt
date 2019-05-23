@@ -4,6 +4,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +45,13 @@ class SearchResultPagedListAdapter() : PagedListAdapter<SearchResultModel, Recyc
             .resize(120, 120)
             .centerInside()
             .into(holder.pokemonIcon)
+
+        holder.view.setOnClickListener {
+            Log.d(TAG, "I clicked on ${searchResultRecord?.name}")
+            val action = MainFragmentDirections.actionMainFragmentToPokeInfoFragment(searchResultRecord?.name ?: "ditto")
+            // one thing I don't like about this code is that findNavController as a dependency on the view
+            holder.view.findNavController().navigate(action)
+        }
     }
 
     companion object {

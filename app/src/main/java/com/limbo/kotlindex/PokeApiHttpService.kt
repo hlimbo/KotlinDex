@@ -1,5 +1,6 @@
 package com.limbo.kotlindex
 
+import com.limbo.kotlindex.models.FlavorTextEntriesModel
 import com.limbo.kotlindex.models.PokemonModel
 import com.limbo.kotlindex.models.SearchResultsModel
 import kotlinx.coroutines.Deferred
@@ -18,4 +19,7 @@ interface PokeApiHttpService {
 
     @GET("pokemon")
     fun obtainPokemonSearchResults(@QueryMap options: Map<String, String>) : Deferred<SearchResultsModel>
+
+    @GET("pokemon-species/{name}")
+    fun obtainPokemonFlavorTexts(@Path("name") name: String) : Deferred<FlavorTextEntriesModel>
 }

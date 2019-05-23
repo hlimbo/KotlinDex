@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.limbo.kotlindex.PokeApiHttpService
 import com.limbo.kotlindex.PokeApiServiceFactory
+import com.limbo.kotlindex.models.FlavorTextEntryModel
+import com.limbo.kotlindex.models.LanguageModel
 import com.limbo.kotlindex.models.PokemonModel
 import com.limbo.kotlindex.models.SearchResultsModel
 import retrofit2.Call
@@ -91,6 +93,36 @@ class PokeApiHttpRepository {
                 Log.d(TAG, "error code: ${e.code()}")
             } catch(e: Throwable) {
                 Log.d(TAG, ".obtainPokemonSearchResultByUrl caught a throwable exception: ${e.message}")
+            }
+        }
+
+        return data
+    }
+
+    fun obtainPokemonFlavorText(pokemonName: String) : LiveData<FlavorTextEntryModel> {
+        val data: MutableLiveData<FlavorTextEntryModel> = MutableLiveData()
+        coroutineScope.launch {
+            try {
+                val response = pokeApiService.obtainPokemonFlavorTexts(pokemonName).await()
+
+                // locate the correct flavor text entry to use (English language only)
+                var isEnglishLanguageSupported = false
+                for(flavorTextEntry in response.flavorTextEntries) {
+                    if(flavorTextEntry.language.name == "en") {
+                        data.postValue(flavorTextEntry)
+                        isEnglishLanguageSupported = true
+                    }
+                }
+
+                if(!isEnglishLanguageSupported) {
+                    data.postValue(FlavorTextEntryModel("Sorry...current api does not support English language for this KotlinDex Entry", LanguageModel("N/A")))
+                }
+
+            } catch(e: HttpException) {
+                Log.d(TAG, ".obtainPokemonFlavorText caught an http exception: ${e.message} with error response: ${e.response().errorBody()}")
+                Log.d(TAG, "error code: ${e.code()}")
+            } catch(e: Throwable) {
+                Log.d(TAG, ".obtainPokemonFlavorText caught a throwable exception: ${e.message}")
             }
         }
 
