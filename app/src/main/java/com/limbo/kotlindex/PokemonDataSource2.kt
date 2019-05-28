@@ -57,7 +57,7 @@ class PokemonDataSource2(private val pokeService: PokeApiHttpService) : PageKeye
         options["limit"] = "20"
         coroutineScope.launch {
             try {
-                val response = pokeService.obtainPokemonSearchResults(options).await()
+                val response = pokeService.obtainPokemonSearchResultsAsync(options).await()
                 callback.onResult(response.results, null, response.nextPageUrl)
             } catch(e: HttpException) {
                 Log.d(TAG, ".loadInitial failed with exception message: ${e.message}")
@@ -116,7 +116,7 @@ class PokemonDataSource2(private val pokeService: PokeApiHttpService) : PageKeye
         } else {
             coroutineScope.launch {
                 try {
-                    val response = pokeService.obtainPokemonSearchResults(options).await()
+                    val response = pokeService.obtainPokemonSearchResultsAsync(options).await()
                     callback.onResult(response.results, response.nextPageUrl)
                 } catch(e: HttpException) {
                     Log.d(TAG, ".loadAfter caught HttpException: ${e.response().errorBody()}")

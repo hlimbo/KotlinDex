@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.search_results_recycler_view.*
 // implement pagination - DONE
 // convert network calls to coroutines ~ DONE
 // load sprite image of pokemon - DONE
-// TODO: implement Pokemon information page
+// implement Pokemon information page - DONE
 /*
     * name
     * id

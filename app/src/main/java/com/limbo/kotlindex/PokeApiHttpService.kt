@@ -11,15 +11,15 @@ import retrofit2.http.QueryMap
 import retrofit2.http.Url
 
 interface PokeApiHttpService {
-    @GET("pokemon/{name}")
-    fun obtainPokemonSearchResult(@Path("name") name: String) : Deferred<PokemonModel>
-
     @GET
-    fun obtainPokemonSearchResultByUrl(@Url url: String) : Deferred<PokemonModel>
+    fun obtainPokemonSearchResultByUrlAsync(@Url url: String) : Deferred<PokemonModel>
 
     @GET("pokemon")
-    fun obtainPokemonSearchResults(@QueryMap options: Map<String, String>) : Deferred<SearchResultsModel>
+    fun obtainPokemonSearchResultsAsync(@QueryMap options: Map<String, String>) : Deferred<SearchResultsModel>
 
     @GET("pokemon-species/{name}")
-    fun obtainPokemonFlavorTexts(@Path("name") name: String) : Deferred<FlavorTextEntriesModel>
+    fun obtainPokemonFlavorTextsAsync(@Path("name") name: String) : Deferred<FlavorTextEntriesModel>
+
+    @GET("pokemon/{name}")
+    fun obtainPokemonByNameAsync(@Path("name") name: String) : Deferred<PokemonModel>
 }

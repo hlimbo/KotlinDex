@@ -52,7 +52,7 @@ class PokeApiHttpRepository {
 
         coroutineScope.launch {
             try {
-                val response = pokeApiService.obtainPokemonSearchResults(options).await()
+                val response = pokeApiService.obtainPokemonSearchResultsAsync(options).await()
                 data.postValue(response)
             } catch(e: HttpException) {
                 Log.d(TAG, ".obtainPokemonSearchResults caught an http exception: ${e.message} with error response: ${e.response().errorBody()}")
@@ -86,7 +86,7 @@ class PokeApiHttpRepository {
         val data: MutableLiveData<PokemonModel> = MutableLiveData()
         coroutineScope.launch {
             try {
-                val response = pokeApiService.obtainPokemonSearchResultByUrl(url).await()
+                val response = pokeApiService.obtainPokemonSearchResultByUrlAsync(url).await()
                 data.postValue(response)
             } catch(e: HttpException) {
                 Log.d(TAG, ".obtainPokemonSearchResultByUrl caught an http exception: ${e.message} with error response: ${e.response().errorBody()}")
@@ -103,7 +103,7 @@ class PokeApiHttpRepository {
         val data: MutableLiveData<FlavorTextEntryModel> = MutableLiveData()
         coroutineScope.launch {
             try {
-                val response = pokeApiService.obtainPokemonFlavorTexts(pokemonName).await()
+                val response = pokeApiService.obtainPokemonFlavorTextsAsync(pokemonName).await()
 
                 // locate the correct flavor text entry to use (English language only)
                 var isEnglishLanguageSupported = false
@@ -123,6 +123,26 @@ class PokeApiHttpRepository {
                 Log.d(TAG, "error code: ${e.code()}")
             } catch(e: Throwable) {
                 Log.d(TAG, ".obtainPokemonFlavorText caught a throwable exception: ${e.message}")
+            }
+        }
+
+        return data
+    }
+
+    fun obtainPokemonBasicInfo(pokemonName: String) : LiveData<PokemonModel> {
+        val data: MutableLiveData<PokemonModel> = MutableLiveData()
+
+        coroutineScope.launch {
+            try {
+                val response = pokeApiService.obtainPokemonByNameAsync(pokemonName).await()
+//                Log.d(TAG, ".obtainPokemonBasicInfo: ${response.types.first()}")
+//                Log.d(TAG, ".obtainPokemonBasicInfo: ${response.types.last()}")
+                data.postValue(response)
+            } catch(e: HttpException) {
+                Log.d(TAG, ".obtainPokemonBasicInfo caught an http exception: ${e.message} with error response: ${e.response().errorBody()}")
+                Log.d(TAG, "error code: ${e.code()}")
+            } catch(e: Throwable) {
+                Log.d(TAG, ".obtainPokemonBasicInfo caught a throwable exception: ${e.message}")
             }
         }
 

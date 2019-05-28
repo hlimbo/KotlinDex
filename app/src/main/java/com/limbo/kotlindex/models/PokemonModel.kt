@@ -19,7 +19,7 @@ data class PokemonModel(val abilities: List<AbilityContainer>,
                         val species: Species,
                         val sprites: Sprites,
                         val stats: List<StatContainer>,
-                        val types: List<PokemonType>,
+                        val types: List<PokemonTypeInfo>,
                         val weight: Int)
 
 // ** Abilities **//
@@ -73,4 +73,5 @@ data class StatContainer(@SerializedName("base_stat") val baseStat: Int,
                          val stat: Stat)
 data class Stat(val name: String, val url: String)
 
+data class PokemonTypeInfo(val slot: Int, val type: PokemonType)
 data class PokemonType(val name: String, val url: String)

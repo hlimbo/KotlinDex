@@ -14,16 +14,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.limbo.kotlindex.models.FlavorTextEntryModel
+import com.limbo.kotlindex.models.PokemonModel
 import com.limbo.kotlindex.repository.PokeApiHttpRepository
 import com.limbo.kotlindex.repository.PokeApiNetworkPagingRepository
 import com.limbo.kotlindex.viewmodels.PokemonInfoViewModel
 import com.limbo.kotlindex.viewmodels.SearchResultPagingViewModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_info_view.*
 
 class PokeInfoFragment : Fragment() {
     private val TAG = "PokeInfoFrag"
-
-    val args: PokeInfoFragmentArgs by navArgs()
+    private val args: PokeInfoFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +43,38 @@ class PokeInfoFragment : Fragment() {
             Log.d(TAG, "savedInstanceState for this fragment is null")
         }
 
-        pokemonName.text = args.pokemonName
-
         val model = getViewModel()
+
+        pokemonName.text = args.pokemonName
         model.getFlavorText(pokemonName.text.toString()).observe(this, Observer<FlavorTextEntryModel> {
             pokemonDescText.text = it.flavorText
+        })
+
+        model.getPokemonBasicInfo(pokemonName.text.toString()).observe(this, Observer<PokemonModel> {
+            height.text = "height: ${it.height}"
+            weight.text = "weight: ${it.weight}"
+
+            val builder = StringBuilder()
+            Log.d(TAG, ".getPokemonBasicInfo first type: ${it.types.first()}")
+            it.types.forEach { pokemonType ->
+                builder.append(pokemonType.type.name).append(", ")
+                Log.d(TAG, ".getPokemonBasicInfo ${pokemonType.type.name}")
+            }
+
+            // remove extra comma and space at the end
+            builder
+                .deleteCharAt(builder.length - 1)
+                .deleteCharAt(builder.length - 1)
+
+            types.text = builder.toString()
+
+            Picasso.get().load(it.sprites.iconShinyPath)
+                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .resize(400, 400)
+                .centerInside()
+                .into(pokemonPic)
+
         })
     }
 
