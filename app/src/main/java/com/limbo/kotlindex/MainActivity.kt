@@ -30,9 +30,9 @@ import kotlinx.android.synthetic.main.search_results_recycler_view.*
     * front sprite (I wish I could use a bigger picture... maybe find a different API for this)
     * types
  */
+// TODO: implement search bar (exact bar search)
 // TODO: save data requested over the network on a local db on phone
 // TODO: save image url paths on a local db
-// TODO: implement search bar (exact bar search)
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
     private lateinit var model: SearchResultPagingViewModel

@@ -1,7 +1,5 @@
 package com.limbo.kotlindex
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,16 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.limbo.kotlindex.models.FlavorTextEntryModel
 import com.limbo.kotlindex.models.PokemonModel
 import com.limbo.kotlindex.repository.PokeApiHttpRepository
-import com.limbo.kotlindex.repository.PokeApiNetworkPagingRepository
+import com.limbo.kotlindex.util.getViewModel
 import com.limbo.kotlindex.viewmodels.PokemonInfoViewModel
-import com.limbo.kotlindex.viewmodels.SearchResultPagingViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_info_view.*
 
@@ -43,8 +37,7 @@ class PokeInfoFragment : Fragment() {
             Log.d(TAG, "savedInstanceState for this fragment is null")
         }
 
-        val model = getViewModel()
-
+        val model = getViewModel { PokemonInfoViewModel(PokeApiHttpRepository()) }
         pokemonName.text = args.pokemonName
         model.getFlavorText(pokemonName.text.toString()).observe(this, Observer<FlavorTextEntryModel> {
             pokemonDescText.text = it.flavorText
@@ -76,17 +69,5 @@ class PokeInfoFragment : Fragment() {
                 .into(pokemonPic)
 
         })
-    }
-
-    // TODO: should move this out into its own generic utility function for other viewModels to use
-    private fun getViewModel(): PokemonInfoViewModel {
-        return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val repo = PokeApiHttpRepository()
-
-                @Suppress("UNCHECKED_CAST")
-                return PokemonInfoViewModel(repo) as T
-            }
-        })[PokemonInfoViewModel::class.java]
     }
 }

@@ -8,16 +8,20 @@
         tools:context=".MainActivity"
         android:id="@+id/fragment_container">
 
-    <fragment
-            android:name="androidx.navigation.fragment.NavHostFragment"
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:navGraph="@navigation/kotlin_dex_nav_graph"
-            app:defaultNavHost="true"
-            android:id="@+id/fragment"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            android:layout_height="match_parent">
+
+        <fragment
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:navGraph="@navigation/kotlin_dex_nav_graph"
+                app:defaultNavHost="true"
+                android:id="@+id/fragment"
+                />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@ import com.limbo.kotlindex.models.FlavorTextEntryModel
 import com.limbo.kotlindex.models.PokemonModel
 import com.limbo.kotlindex.repository.PokeApiHttpRepository
 
-class PokemonInfoViewModel(private val pokeRepo: PokeApiHttpRepository): ViewModel() {
+class PokemonInfoViewModel(private val pokeRepo: PokeApiHttpRepository) : ViewModel() {
 
     fun getFlavorText(pokemonName: String): LiveData<FlavorTextEntryModel> {
         return pokeRepo.obtainPokemonFlavorText(pokemonName)

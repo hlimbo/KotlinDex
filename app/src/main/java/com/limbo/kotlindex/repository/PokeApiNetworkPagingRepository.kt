@@ -15,7 +15,6 @@ import com.limbo.kotlindex.models.SearchResultModel
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
-// will get used by a ViewModel
 class PokeApiNetworkPagingRepository {
     private val TAG = "PokeNetworkPageRepo"
     private val BASE_URL = "https://pokeapi.co/api/v2/"
@@ -44,7 +43,7 @@ class PokeApiNetworkPagingRepository {
     }
 
     fun getPokemonList2(pageSize: Int) : LiveData<PagedList<SearchResultModel>> {
-        Log.d(TAG, ".getPokemonList2($pageSize) called")
+        //Log.d(TAG, ".getPokemonList2($pageSize) called")
         val pokemonDataSourceFactory2 = PokemonDataSourceFactory2(api)
         return LivePagedListBuilder(pokemonDataSourceFactory2, pageSize).build()
     }
