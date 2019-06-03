@@ -6,7 +6,7 @@
             app:startDestination="@id/mainFragment">
     <fragment
             android:id="@+id/mainFragment"
-            android:name="com.limbo.kotlindex.MainFragment"
+            android:name="com.limbo.kotlindex.fragments.MainFragment"
             android:label="search_results_recycler_view"
             tools:layout="@layout/search_results_recycler_view">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
             android:id="@+id/pokeInfoFragment"
-            android:name="com.limbo.kotlindex.PokeInfoFragment"
+            android:name="com.limbo.kotlindex.fragments.PokeInfoFragment"
             android:label="pokemon_info_view"
             tools:layout="@layout/pokemon_info_view">
         <argument

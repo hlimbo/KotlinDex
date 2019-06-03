@@ -3,15 +3,11 @@ package com.limbo.kotlindex.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.limbo.kotlindex.PokeApiHttpService
-import com.limbo.kotlindex.PokeApiServiceFactory
-import com.limbo.kotlindex.models.FlavorTextEntryModel
-import com.limbo.kotlindex.models.LanguageModel
-import com.limbo.kotlindex.models.PokemonModel
-import com.limbo.kotlindex.models.SearchResultsModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.limbo.kotlindex.util.PokeApiServiceFactory
+import com.limbo.kotlindex.PokemonDataSourceFactory
+import com.limbo.kotlindex.models.*
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 
@@ -109,5 +105,11 @@ class PokeApiHttpRepository {
         }
 
         return data
+    }
+
+    fun obtainPokemonPagedList(pageSize: Int) : LiveData<PagedList<SearchResultModel>> {
+        //Log.d(TAG, ".getPokemonList2($pageSize) called")
+        val pokemonDataSourceFactory2 = PokemonDataSourceFactory(pokeApiService)
+        return LivePagedListBuilder(pokemonDataSourceFactory2, pageSize).build()
     }
 }

@@ -4,14 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.limbo.kotlindex.models.SearchResultModel
-import java.util.concurrent.Executor
+import com.limbo.kotlindex.repository.PokeApiHttpService
 
-// Int is the key because we want to keep track of the page offset as the poke api
-// supports offset query parameter
-class PokemonDataSourceFactory(private val pokeApi: PokeApiHttpService) : DataSource.Factory<Int, SearchResultModel>() {
-    val TAG = "PokeDataSrcFactory"
-    val sourceLiveData = MutableLiveData<PokemonDataSource>()
-    override fun create(): DataSource<Int, SearchResultModel> {
+class PokemonDataSourceFactory(private val pokeApi: PokeApiHttpService) : DataSource.Factory<String, SearchResultModel>() {
+    private val TAG = "PokeDataSrcFactory2"
+    private val sourceLiveData = MutableLiveData<PokemonDataSource>()
+    override fun create(): DataSource<String, SearchResultModel> {
         val source = PokemonDataSource(pokeApi)
         sourceLiveData.postValue(source)
 

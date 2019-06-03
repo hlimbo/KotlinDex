@@ -10,10 +10,11 @@ import androidx.navigation.findNavController
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.limbo.kotlindex.fragments.MainFragmentDirections
 import com.limbo.kotlindex.models.SearchResultModel
 import com.squareup.picasso.Picasso
 
-class SearchResultPagedListAdapter() : PagedListAdapter<SearchResultModel, RecyclerView.ViewHolder>(POST_COMPARATOR){
+class SearchResultPagedListAdapter : PagedListAdapter<SearchResultModel, RecyclerView.ViewHolder>(POST_COMPARATOR){
     private val TAG = "SearchResultPLA"
 
     private val pokePicUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"

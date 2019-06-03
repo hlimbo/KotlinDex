@@ -1,4 +1,4 @@
-package com.limbo.kotlindex
+package com.limbo.kotlindex.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.limbo.kotlindex.R
 import com.limbo.kotlindex.models.FlavorTextEntryModel
 import com.limbo.kotlindex.models.PokemonModel
 import com.limbo.kotlindex.repository.PokeApiHttpRepository
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.pokemon_info_view.*
 
 class PokeInfoFragment : Fragment() {
     private val TAG = "PokeInfoFrag"
+    // found in debug directory that Android Framework autogenerates for you when using Navigation library
     private val args: PokeInfoFragmentArgs by navArgs()
 
     override fun onCreateView(

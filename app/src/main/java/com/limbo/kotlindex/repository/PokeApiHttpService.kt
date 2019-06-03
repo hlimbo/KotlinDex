@@ -1,4 +1,4 @@
-package com.limbo.kotlindex
+package com.limbo.kotlindex.repository
 
 import com.limbo.kotlindex.models.FlavorTextEntriesModel
 import com.limbo.kotlindex.models.PokemonModel
