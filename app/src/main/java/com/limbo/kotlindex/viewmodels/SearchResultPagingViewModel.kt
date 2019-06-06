@@ -14,9 +14,9 @@ class SearchResultPagingViewModel(private val repository: PokeApiHttpRepository)
     // the data is coming from the PokeApiNetworkPagingRepository instance
     fun searchResults(): LiveData<PagedList<SearchResultModel>> {
         val results = repository.obtainPokemonPagedList(20)
-        Log.d(TAG, ".searchResults() with with observers?: ${results.hasObservers()}")
-        Log.d(TAG, ".searchResults() with with active observers?: ${results.hasActiveObservers()}")
-        Log.d(TAG, ".searchResults() with with value?: ${results.value?.get(0)?.name}")
+//        Log.d(TAG, ".searchResults() with with observers?: ${results.hasObservers()}")
+//        Log.d(TAG, ".searchResults() with with active observers?: ${results.hasActiveObservers()}")
+//        Log.d(TAG, ".searchResults() with with value?: ${results.value?.get(0)?.name}")
         return results
     }
 

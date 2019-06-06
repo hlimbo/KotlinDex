@@ -11,16 +11,16 @@ import com.limbo.kotlindex.models.*
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 
-class PokeApiHttpRepository {
+class PokeApiHttpRepository(val pokeApiService: PokeApiHttpService, val coroutineScope: CoroutineScope) {
     private val BASE_URL = "https://pokeapi.co/api/v2/"
     private val TAG = "PokeAPIRepo"
 
-    private val pokeApiService: PokeApiHttpService by lazy {
-        PokeApiServiceFactory.create(BASE_URL)
-    }
-    private val coroutineScope: CoroutineScope by lazy {
-        CoroutineScope(Dispatchers.IO)
-    }
+//    private val pokeApiService: PokeApiHttpService by lazy {
+//        PokeApiServiceFactory.create(BASE_URL)
+//    }
+//    private val coroutineScope: CoroutineScope by lazy {
+//        CoroutineScope(Dispatchers.IO)
+//    }
 
     fun obtainPokemonSearchResults(options: Map<String, String>): LiveData<SearchResultsModel> {
         val data: MutableLiveData<SearchResultsModel> = MutableLiveData()

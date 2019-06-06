@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.limbo.kotlindex.R
+import com.limbo.kotlindex.di.DaggerPokemonComponent
 import com.limbo.kotlindex.models.FlavorTextEntryModel
 import com.limbo.kotlindex.models.PokemonModel
 import com.limbo.kotlindex.repository.PokeApiHttpRepository
@@ -16,8 +17,9 @@ import com.limbo.kotlindex.util.getViewModel
 import com.limbo.kotlindex.viewmodels.PokemonInfoViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_info_view.*
+import javax.inject.Inject
 
-class PokeInfoFragment : Fragment() {
+class PokeInfoFragment : BaseFragment() {
     private val TAG = "PokeInfoFrag"
     // found in debug directory that Android Framework autogenerates for you when using Navigation library
     private val args: PokeInfoFragmentArgs by navArgs()
@@ -32,14 +34,13 @@ class PokeInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         Log.d(TAG, ".onViewCreated")
 
         if(savedInstanceState == null) {
             Log.d(TAG, "savedInstanceState for this fragment is null")
         }
 
-        val model = getViewModel { PokemonInfoViewModel(PokeApiHttpRepository()) }
+        val model = getViewModel { PokemonInfoViewModel(pokeApiHttpRepository) }
         pokemonName.text = args.pokemonName
         model.getFlavorText(pokemonName.text.toString()).observe(this, Observer<FlavorTextEntryModel> {
             pokemonDescText.text = it.flavorText
