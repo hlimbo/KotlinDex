@@ -10,11 +10,14 @@ import com.limbo.kotlindex.PokemonDataSourceFactory
 import com.limbo.kotlindex.models.*
 import kotlinx.coroutines.*
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class PokeApiHttpRepository(val pokeApiService: PokeApiHttpService, val coroutineScope: CoroutineScope) {
+class PokeApiHttpRepository @Inject constructor(private val pokeApiService: PokeApiHttpService, private val coroutineScope: CoroutineScope) {
     private val BASE_URL = "https://pokeapi.co/api/v2/"
     private val TAG = "PokeAPIRepo"
 
+    // alternative to using Dagger2 Dependency Injection Framework ~ introduce DIRECT dependencies composed within the class itself
+    // instead of passing it through as constructor params
 //    private val pokeApiService: PokeApiHttpService by lazy {
 //        PokeApiServiceFactory.create(BASE_URL)
 //    }

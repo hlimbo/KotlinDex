@@ -23,32 +23,4 @@ class ApplicationModule {
 
         return retroFitInstance.create(PokeApiHttpService::class.java)
     }
-
-//    @Provides
-//    fun providesGson(): Gson {
-//        return GsonBuilder().setVersion(1.0).create()
-//    }
-//
-//    @Provides
-//    fun providesGsonConverterFactory(): GsonConverterFactory {
-//        return GsonConverterFactory.create(providesGson())
-//    }
-//
-//    @Provides
-//    fun providesRetrofit(baseUrl: String): Retrofit {
-//        return Retrofit.Builder()
-//            .baseUrl(baseUrl)
-//            .addConverterFactory(providesGsonConverterFactory())
-//            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-//            .build()
-//    }
-//
-//    @Provides
-//    fun providesPokeApiService(): PokeApiHttpService {
-//        return providesRetrofit("https://pokeapi.co/api/v2/").create(PokeApiHttpService::class.java)
-//    }
-
-//    companion object{
-//        private const val BASE_URL = "https://pokeapi.co/api/v2/"
-//    }
 }

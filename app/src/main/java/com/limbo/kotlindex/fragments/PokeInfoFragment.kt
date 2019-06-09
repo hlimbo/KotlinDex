@@ -72,5 +72,7 @@ class PokeInfoFragment : BaseFragment() {
                 .into(pokemonPic)
 
         })
+
+        Log.d(TAG,"pokeApiHttpRepository string: $pokeApiHttpRepository")
     }
 }

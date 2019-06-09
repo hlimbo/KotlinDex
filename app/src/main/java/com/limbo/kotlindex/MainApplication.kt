@@ -13,14 +13,18 @@ import javax.inject.Inject
 class MainApplication : Application(){
     private val TAG = "MainApplication"
 
-    @Inject lateinit var pokeApiHttpService: PokeApiHttpService
+//     @Inject lateinit var pokeApiHttpService: PokeApiHttpService
 
     override fun onCreate() {
         super.onCreate()
         Log.d(TAG, "onCreate called")
         // injecting the dependencies in MainApplication
-        DaggerServicesComponent.create().inject(this)
-        Log.d(TAG, "injected value: $pokeApiHttpService")
+        // for other classes such as Activities and Fragments to see the injected values
+        // you must inject the values here in MainApplication class first
+        // then you access the injected value from activity or fragment by obtaining
+        // a reference to their application.
+//        DaggerServicesComponent.create().inject(this)
+//        Log.d(TAG, "injected value: $pokeApiHttpService")
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {

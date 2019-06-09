@@ -23,8 +23,7 @@ import javax.inject.Inject
     * types
  */
 // refactor getViewModel to be reusable for any ViewModel subtype ~ DONE
-// TODO: use Dagger2 for Dependency Injection (use it so that my Fragment classes don't have DIRECT dependencies required for the ViewModel and Repositories being instantiated)
-    // goal: refactor the code such that third party dependencies such as Retrofit are injectable into the code at an Application Level
+// use Dagger2 for Dependency Injection (use it so that my Fragment classes don't have DIRECT dependencies required for Repository class) ~ DONE
     // refactor code so that I don't need to explicitly inject repo dependency for viewModel class (instead do this through Dagger2 Convention)
 // TODO: implement search bar (exact bar search)
 // TODO: save data requested over the network on a local db on phone

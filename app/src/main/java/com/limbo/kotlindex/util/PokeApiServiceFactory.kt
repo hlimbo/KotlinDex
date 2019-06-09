@@ -7,6 +7,7 @@ import com.limbo.kotlindex.repository.PokeApiHttpService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+// alternative to using Dagger2 Dependency Injection
 class PokeApiServiceFactory {
     companion object {
         fun create(baseUrl: String): PokeApiHttpService {

@@ -8,11 +8,20 @@ import com.limbo.kotlindex.repository.PokeApiHttpRepository
 import javax.inject.Inject
 
 open class BaseFragment: Fragment() {
-    @Inject lateinit var pokeApiHttpRepository: PokeApiHttpRepository
+    // this annotation can only be called when the component implementation calls the inject() method here directly
+    // limitation: can't declare this injected field in the classes that derive from this class as it will throw a runtime exception
+    // stating this instance of pokeApiHttpRepository won't be found
+    @Inject protected lateinit var pokeApiHttpRepository: PokeApiHttpRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DaggerPokemonComponent.create().inject(this)
         Log.d("BaseFrag","pokeApiHttpRepository string: $pokeApiHttpRepository")
     }
+
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        // example of obtaining a dependency injected from MainApplication class
+////        Log.d("BaseFrag", "onAttach called with pokeApiHttpRepository string: ${(requireActivity().application as MainApplication).pokeApiHttpService}")
+//     }
 }

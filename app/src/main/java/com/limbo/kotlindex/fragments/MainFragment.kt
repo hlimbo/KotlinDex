@@ -1,6 +1,7 @@
 package com.limbo.kotlindex.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,28 +21,26 @@ import kotlinx.android.synthetic.main.search_results_recycler_view.*
 import javax.inject.Inject
 
 class MainFragment : BaseFragment() {
+    private val TAG = "MainFrag"
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.search_results_recycler_view, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val adapter = SearchResultPagedListAdapter()
         search_recycler_view.layoutManager = LinearLayoutManager(activity)
         search_recycler_view.adapter = adapter
         search_recycler_view.addItemDecoration(DividerItemDecoration(search_recycler_view.context, DividerItemDecoration.VERTICAL))
 
-        // alternative here would to be to inject the viewModel using @Inject annotation
-        // actionable thing to do here would be to inject PokeApiHttpRepository
-//        val model = getViewModel{ SearchResultPagingViewModel(PokeApiHttpRepository()) }
-//        model.searchResults().observe(this, Observer<PagedList<SearchResultModel>> {
-//            adapter.submitList(it)
-//        })
-
         val model = getViewModel { SearchResultPagingViewModel(pokeApiHttpRepository) }
         model.searchResults().observe(this, Observer<PagedList<SearchResultModel>> {
           adapter.submitList(it)
         })
+
+        Log.d(TAG,"pokeApiHttpRepository string: $pokeApiHttpRepository")
     }
 
 }
