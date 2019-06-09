@@ -7,9 +7,11 @@ import com.limbo.kotlindex.models.SearchResultModel
 import com.limbo.kotlindex.repository.PokeApiHttpService
 
 class PokemonDataSourceFactory(private val pokeApi: PokeApiHttpService) : DataSource.Factory<String, SearchResultModel>() {
-    private val TAG = "PokeDataSrcFactory2"
+    private val TAG = "PokeDataSrcFactory"
     private val sourceLiveData = MutableLiveData<PokemonDataSource>()
     override fun create(): DataSource<String, SearchResultModel> {
+        // only makes one PokemonDataSource
+        Log.d(TAG, "create called... making a new PokemonDataSource")
         val source = PokemonDataSource(pokeApi)
         sourceLiveData.postValue(source)
 
@@ -18,4 +20,6 @@ class PokemonDataSourceFactory(private val pokeApi: PokeApiHttpService) : DataSo
 
         return source
     }
+
+
 }

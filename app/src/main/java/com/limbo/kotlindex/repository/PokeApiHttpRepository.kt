@@ -111,8 +111,7 @@ class PokeApiHttpRepository @Inject constructor(private val pokeApiService: Poke
     }
 
     fun obtainPokemonPagedList(pageSize: Int) : LiveData<PagedList<SearchResultModel>> {
-        //Log.d(TAG, ".getPokemonList2($pageSize) called")
-        val pokemonDataSourceFactory2 = PokemonDataSourceFactory(pokeApiService)
-        return LivePagedListBuilder(pokemonDataSourceFactory2, pageSize).build()
+        val pokemonDataSourceFactory = PokemonDataSourceFactory(pokeApiService)
+        return LivePagedListBuilder(pokemonDataSourceFactory, pageSize).build()
     }
 }

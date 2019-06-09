@@ -5,10 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import com.limbo.kotlindex.dagger2example.DaggerMagicBox
 import com.limbo.kotlindex.dagger2example.Info
-import com.limbo.kotlindex.di.ApplicationModule
-import com.limbo.kotlindex.di.DaggerPokemonComponent
-import com.limbo.kotlindex.di.DaggerServicesComponent
-import com.limbo.kotlindex.repository.PokeApiHttpService
 import javax.inject.Inject
 
 // implement pagination - DONE
@@ -18,14 +14,14 @@ import javax.inject.Inject
 /*
     * name
     * id
-    * abilities
+    * flavor text
     * front sprite (I wish I could use a bigger picture... maybe find a different API for this)
     * types
  */
 // refactor getViewModel to be reusable for any ViewModel subtype ~ DONE
 // use Dagger2 for Dependency Injection (use it so that my Fragment classes don't have DIRECT dependencies required for Repository class) ~ DONE
     // refactor code so that I don't need to explicitly inject repo dependency for viewModel class (instead do this through Dagger2 Convention)
-// TODO: implement search bar (exact bar search)
+// implement search bar (exact bar search) ~ DONE
 // TODO: save data requested over the network on a local db on phone
 // TODO: save image url paths on a local db
 class MainActivity : AppCompatActivity() {

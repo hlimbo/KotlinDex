@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import com.limbo.kotlindex.di.DaggerPokemonComponent
 import com.limbo.kotlindex.repository.PokeApiHttpRepository
+import com.limbo.kotlindex.repository.PokeApiHttpService
 import javax.inject.Inject
 
 open class BaseFragment: Fragment() {
@@ -12,6 +13,7 @@ open class BaseFragment: Fragment() {
     // limitation: can't declare this injected field in the classes that derive from this class as it will throw a runtime exception
     // stating this instance of pokeApiHttpRepository won't be found
     @Inject protected lateinit var pokeApiHttpRepository: PokeApiHttpRepository
+    @Inject protected lateinit var pokeApiHttpService: PokeApiHttpService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

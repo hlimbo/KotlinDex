@@ -2,10 +2,7 @@ package com.limbo.kotlindex
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavController
-import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -14,7 +11,7 @@ import com.limbo.kotlindex.fragments.MainFragmentDirections
 import com.limbo.kotlindex.models.SearchResultModel
 import com.squareup.picasso.Picasso
 
-class SearchResultPagedListAdapter : PagedListAdapter<SearchResultModel, RecyclerView.ViewHolder>(POST_COMPARATOR){
+class PokemonResultPagedListAdapter : PagedListAdapter<SearchResultModel, RecyclerView.ViewHolder>(POST_COMPARATOR){
     private val TAG = "SearchResultPLA"
 
     private val pokePicUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
@@ -24,16 +21,16 @@ class SearchResultPagedListAdapter : PagedListAdapter<SearchResultModel, Recycle
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         Log.d(TAG, ".onCreateViewHolder called")
         val view = LayoutInflater.from(parent.context).inflate(R.layout.search_result_view, parent, false)
-        return SearchResultViewHolder(view)
+        return PokemonResultViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         Log.d(TAG, ".onBindViewHolder called on position: $position")
         val searchResultRecord = getItem(position)
-        (holder as SearchResultViewHolder).pokemonName.text = searchResultRecord?.name
+        (holder as PokemonResultViewHolder).pokemonName.text = searchResultRecord?.name
 
         // e.g. https://pokeapi.co/api/v2/pokemon/7/ (need to cache pokemon number somewhere..
-        var pokemonNumber = if(searchResultRecord != null) {
+        val pokemonNumber = if(searchResultRecord != null) {
             searchResultRecord.url.split("/")[6]
         } else {
             "0"

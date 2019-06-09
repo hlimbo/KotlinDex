@@ -15,7 +15,7 @@ import retrofit2.HttpException
 // Android Jetpack: manage infinite lists with RecyclerView and Paging (Google I/O '18)
 class PokemonDataSource(private val pokeService: PokeApiHttpService) : PageKeyedDataSource<String, SearchResultModel>() {
     private val TAG = "PokeDataSource2"
-    private val TOTAL_COUNT = 964 // TODO: get total number of pokemon records over the network to verify if dataset has been invalidated or not
+    private var totalPokemonCount = 964
 
     private val coroutineScope: CoroutineScope by lazy {
         CoroutineScope(Dispatchers.IO)
@@ -34,6 +34,7 @@ class PokemonDataSource(private val pokeService: PokeApiHttpService) : PageKeyed
         coroutineScope.launch {
             try {
                 val response = pokeService.obtainPokemonSearchResultsAsync(options).await()
+                totalPokemonCount = response.count
                 callback.onResult(response.results, null, response.nextPageUrl)
             } catch(e: HttpException) {
                 Log.d(TAG, ".loadInitial failed with exception message: ${e.message}")
