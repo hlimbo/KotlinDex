@@ -23,10 +23,10 @@ class PokemonResultPagingViewModel(private val repository: PokeApiHttpRepository
         return repository.obtainPokemonSearchResults(HashMap())
     }
 
-    fun getAllPokemonNames(pokemontCount: Int): LiveData<SearchResultsModel> {
+    fun getAllPokemonNames(pokemonCount: Int): LiveData<SearchResultsModel> {
         val options = HashMap<String, String>()
         options["offset"] = "0"
-        options["limit"] = pokemontCount.toString()
+        options["limit"] = pokemonCount.toString()
         return repository.obtainPokemonSearchResults(options)
     }
 

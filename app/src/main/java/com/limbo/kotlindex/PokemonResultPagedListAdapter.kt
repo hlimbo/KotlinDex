@@ -38,8 +38,7 @@ class PokemonResultPagedListAdapter : PagedListAdapter<SearchResultModel, Recycl
         holder.pokemonNumber.text = "#".plus(pokemonNumber)
 
         Picasso.get().load("$pokePicUrl$pokemonNumber$PNG")
-            .error(R.drawable.ic_launcher_background)
-            .placeholder(R.drawable.ic_launcher_foreground)
+            .placeholder(R.mipmap.poke_ball_icon)
             .resize(120, 120)
             .centerInside()
             .into(holder.pokemonIcon)

@@ -25,18 +25,13 @@ class SearchResultRecyclerListAdapter: RecyclerView.Adapter<PokemonResultViewHol
 
     override fun onBindViewHolder(holder: PokemonResultViewHolder, position: Int) {
         val searchResultRecord = searchResults[position]
-        holder.pokemonName.text = searchResultRecord?.name
+        holder.pokemonName.text = searchResultRecord.name
         // e.g. https://pokeapi.co/api/v2/pokemon/7/ (need to cache pokemon number somewhere..
-        val pokemonNumber = if(searchResultRecord != null) {
-            searchResultRecord.url.split("/")[6]
-        } else {
-            "0"
-        }
+        val pokemonNumber = searchResultRecord.url.split("/")[6]
         holder.pokemonNumber.text = "#".plus(pokemonNumber)
 
         Picasso.get().load("$pokePicUrl$pokemonNumber$PNG")
-            .error(R.drawable.ic_launcher_background)
-            .placeholder(R.drawable.ic_launcher_foreground)
+            .placeholder(R.mipmap.poke_ball_icon)
             .resize(120, 120)
             .centerInside()
             .into(holder.pokemonIcon)

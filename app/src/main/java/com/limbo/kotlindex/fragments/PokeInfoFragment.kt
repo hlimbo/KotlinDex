@@ -65,8 +65,7 @@ class PokeInfoFragment : BaseFragment() {
             types.text = builder.toString()
 
             Picasso.get().load(it.sprites.iconShinyPath)
-                .error(R.drawable.ic_launcher_background)
-                .placeholder(R.drawable.ic_launcher_foreground)
+                .placeholder(R.mipmap.poke_ball_icon)
                 .resize(400, 400)
                 .centerInside()
                 .into(pokemonPic)

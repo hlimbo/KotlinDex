@@ -104,6 +104,7 @@ class MainFragment : BaseFragment() {
 
                 // find pokemon by name in list
                 val pokemonNames = pokemonSearchResults.map { result -> result.name }
+                Log.d(TAG, "pokemonNames array size: ${pokemonNames.size}")
                 if(pokemonNames.contains(query)) {
                     Log.d(TAG, "onQueryTextSubmit invoked found pokemon: $query in the list")
                     // Things tried
@@ -111,9 +112,14 @@ class MainFragment : BaseFragment() {
                     // 2. tried to create my on PagedList.Builder instance but requires executors
                     // 3. tried to use LivePageListBuilder and set the value of pagedList but is unable to do so since one has to initialize a pagedList first before setting it....
 
+                    // if previous search result request yielded no results, re-enable adapter view
+                    if(search_recycler_view.visibility == View.GONE) {
+                        search_recycler_view.visibility = View.VISIBLE
+                        pokemon_not_found_view.visibility = View.GONE
+                    }
+
                     theSearchResult.add(SearchResultModel(query!!, pokemonMap[query]!!))
                     search_recycler_view.adapter = searchAdapter
-                    search_recycler_view.addItemDecoration(DividerItemDecoration(search_recycler_view.context, DividerItemDecoration.VERTICAL))
                     searchAdapter.submitData(theSearchResult)
 
                 } else {
