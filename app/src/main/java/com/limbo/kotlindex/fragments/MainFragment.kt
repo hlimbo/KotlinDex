@@ -106,6 +106,7 @@ class MainFragment : BaseFragment() {
                 val pokemonNames = pokemonSearchResults.map { result -> result.name }
                 Log.d(TAG, "pokemonNames array size: ${pokemonNames.size}")
                 if(pokemonNames.contains(query)) {
+                    isSearchQueryPresent = true
                     Log.d(TAG, "onQueryTextSubmit invoked found pokemon: $query in the list")
                     // Things tried
                     // 1. tried to reuse model.getPokemonResults.observe() to clear and manually add in the data found <- failed due to pagedList not supporting add method

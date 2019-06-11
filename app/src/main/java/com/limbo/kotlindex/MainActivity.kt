@@ -22,6 +22,8 @@ import javax.inject.Inject
 // use Dagger2 for Dependency Injection (use it so that my Fragment classes don't have DIRECT dependencies required for Repository class) ~ DONE
     // refactor code so that I don't need to explicitly inject repo dependency for viewModel class (instead do this through Dagger2 Convention)
 // implement search bar (exact bar search) ~ DONE
+// TODO: add progress bar spinner when specific screens are loading
+// TODO: add refresh gesture when internet on phone is temporarily down
 // TODO: save data requested over the network on a local db on phone
 // TODO: save image url paths on a local db
 class MainActivity : AppCompatActivity() {
