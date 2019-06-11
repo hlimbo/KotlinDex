@@ -1,5 +1,11 @@
 # KotlinDex
-PokeDex App written in Kotlin using Android Jetpack components
+PokeDex App written in Kotlin using Android Jetpack components. This project was created merely for educational purposes so that I can learn more about the Android Framework and the various dependencies required to build the App.
+
+## Screenshots
+
+
+## API Dependency
+* [PokeApi](https://pokeapi.co/)
 
 ## Android Dependencies
 * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) 
