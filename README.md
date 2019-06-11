@@ -6,8 +6,10 @@ PokeDex App written in Kotlin using Android Jetpack components. This project was
 ![Alt Text](/screenshots/device-2019-06-10-225508.png?raw=true "Optional Title")
 
 ### Scrolling Feature using Android Jetpack Paging Library
+![Alt Text](/screenshots/scrolling.gif?raw=true "Optional Title")
 
 ### Search for Pokemon by Exact Search
+![Alt Text](/screenshots/searching.gif?raw=true "Optional Title")
 
 ## API Dependency
 * [PokeApi](https://pokeapi.co/)
